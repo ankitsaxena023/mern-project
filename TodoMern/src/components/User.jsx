@@ -3,13 +3,9 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-// import { a, b, c } from "";
 
 function User() {
   let [users, setUsers] = useState([]);
-  console.log(useState(5));
-
-  // console.log("users", users);
 
   const handleDelete = (id) => {
     axios
@@ -39,7 +35,6 @@ function User() {
             <tr>
               <th>Name</th>
               <th>Email</th>
-              <th>Age</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -49,7 +44,6 @@ function User() {
                 <tr key={users._id}>
                   <td>{users.name}</td>
                   <td>{users.email}</td>
-                  <td>{users.age}</td>
                   <td>
                     <Link
                       to={`/update/${users._id}`}

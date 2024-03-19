@@ -7,14 +7,14 @@ function UpdateUser() {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
+  // const [age, setAge] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .put("http://localhost:1080/updateUser/" + id, { name, email, age }) //payload data is sending from frontend to backend using axios we send data from f-b
+      .put("http://localhost:1080/updateUser/" + id, { name, email }) //payload data is sending from frontend to backend using axios we send data from f-b
       .then((response) => {
         navigate("/");
         // console.log(response)
@@ -27,7 +27,7 @@ function UpdateUser() {
       .get("http://localhost:1080/getusers/" + id)
       .then((res) => {
         console.log(res.data);
-        setName(res.data.name), setEmail(res.data.email), setAge(res.data.age);
+        setName(res.data.name), setEmail(res.data.email);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -59,7 +59,7 @@ function UpdateUser() {
               required
             />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="age">Age:</label>
             <input
               className="form-control"
@@ -69,7 +69,7 @@ function UpdateUser() {
               onChange={(e) => setAge(e.target.value)}
               required
             />
-          </div>
+          </div> */}
           <button className="m-2 rounded btn btn-success" type="submit">
             Update
           </button>

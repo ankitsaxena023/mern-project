@@ -6,15 +6,15 @@ import { useNavigate } from "react-router-dom";
 function CreateUser() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [age, setAge] = useState("");
+  // const [age, setAge] = useState("");
 
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log("button clicked");
+
     axios
-      .post("http://localhost:1080/createUser", { name, email, age }) //payload data is sending from frontend to backend using axios we send data from f-b
+      .post("http://localhost:1080/createUser", { name, email }) //payload data is sending from frontend to backend using axios we send data from f-b
       .then((response) => {
         // console.log(response);
         navigate("/");
@@ -49,7 +49,7 @@ function CreateUser() {
               required
             />
           </div>
-          <div>
+          {/* <div>
             <label htmlFor="age">Age:</label>
             <input
               className="form-control"
@@ -59,7 +59,7 @@ function CreateUser() {
               onChange={(e) => setAge(e.target.value)}
               required
             />
-          </div>
+          </div> */}
           <button className="m-2 rounded btn btn-success" type="submit">
             Submit
           </button>
