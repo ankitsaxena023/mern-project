@@ -21,16 +21,17 @@ app.get("/", (req, res) => {
 });
 
 app.post("/createUser", (req, res) => {
+  console.log(req.body);
   UserModal.create(req.body)
-    .then((users) => res.json(users))
-    .catch((err) => res.json(err));
+    .then((users) => res.status(200).send("Updated Successfully"))
+    .catch((err) => res.status(400).send("use unique id for the user"));
 });
 
 app.get("/getusers/:id", (req, res) => {
   const id = req.params.id;
   UserModal.findById({ _id: id })
     .then((users) => res.json(users))
-    .catch((err) => res.json(err));
+    .catch((err) => console.log(err));
 });
 
 app.delete("/delete/:id", (req, res) => {

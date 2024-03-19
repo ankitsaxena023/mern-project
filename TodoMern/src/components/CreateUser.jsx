@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 function CreateUser() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [id, setId] = useState(null);
   // const [age, setAge] = useState("");
 
   const navigate = useNavigate();
@@ -14,12 +15,18 @@ function CreateUser() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:1080/createUser", { name, email }) //payload data is sending from frontend to backend using axios we send data from f-b
+      .post("http://localhost:1080/createUser", { name, email, id }) //payload data is sending from frontend to backend using axios we send data from f-b
       .then((response) => {
-        // console.log(response);
-        navigate("/");
+        console.log("check", response);
+        if (response.status === 200) {
+          alert("user successfully created");
+        }
+        setId(null);
+        setName("");
+        setEmail("");
       })
-      .catch((err) => console.log("error", err));
+      .catch((err) => alert("duplicate id, provide unique one"));
+    navigate("/");
   };
 
   return (
@@ -27,6 +34,17 @@ function CreateUser() {
       <div className="w-50 h-50 bg-white rounded p-3 m-5">
         <form onSubmit={handleSubmit}>
           <h2>Add User</h2>
+          <div className="mb-2">
+            <label htmlFor="id">ID:</label>
+            <input
+              className="form-control"
+              type="number"
+              id="id"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              required
+            />
+          </div>
           <div className="mb-2">
             <label htmlFor="name">Name:</label>
             <input
@@ -49,17 +67,6 @@ function CreateUser() {
               required
             />
           </div>
-          {/* <div>
-            <label htmlFor="age">Age:</label>
-            <input
-              className="form-control"
-              type="number"
-              id="age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required
-            />
-          </div> */}
           <button className="m-2 rounded btn btn-success" type="submit">
             Submit
           </button>

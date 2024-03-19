@@ -33,6 +33,7 @@ function User() {
         <table className="table">
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
               <th>Email</th>
               <th>Action</th>
@@ -42,6 +43,7 @@ function User() {
             {users.map((users) => {
               return (
                 <tr key={users._id}>
+                  <td>{users.id}</td>
                   <td>{users.name}</td>
                   <td>{users.email}</td>
                   <td>

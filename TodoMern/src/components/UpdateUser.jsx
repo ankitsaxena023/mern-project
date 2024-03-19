@@ -7,7 +7,6 @@ function UpdateUser() {
   const { id } = useParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // const [age, setAge] = useState("");
 
   const navigate = useNavigate();
 
@@ -59,17 +58,6 @@ function UpdateUser() {
               required
             />
           </div>
-          {/* <div>
-            <label htmlFor="age">Age:</label>
-            <input
-              className="form-control"
-              type="number"
-              id="age"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-              required
-            />
-          </div> */}
           <button className="m-2 rounded btn btn-success" type="submit">
             Update
           </button>
