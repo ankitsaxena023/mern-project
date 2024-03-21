@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -7,7 +7,7 @@ function CreateUser() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [id, setId] = useState(null);
-  // const [age, setAge] = useState("");
+  const [userCreatedData, setUserCreatedData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -20,6 +20,7 @@ function CreateUser() {
         console.log("check", response);
         if (response.status === 200) {
           alert("user successfully created");
+          getUsers();
         }
         setId(null);
         setName("");
@@ -28,6 +29,16 @@ function CreateUser() {
       .catch((err) => alert("duplicate id, provide unique one"));
     navigate("/");
   };
+
+  function getUsers() {
+    axios
+      .get("http://localhost:1080/")
+      .then((res) => setUserCreatedData(res.data));
+  }
+
+  useEffect(() => {
+    getUsers;
+  }, []);
 
   return (
     <div className="d-flex vh-100 bg-success justify-content-center align-item-center">
